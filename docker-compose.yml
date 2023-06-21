@@ -1,0 +1,20 @@
+version: '3'
+services:
+  fastapi:
+    container_name: storage-fastapi
+    build:
+      context: ./storage
+      args:
+        HOST_UID: ${HOST_UID}
+        HOST_GID: ${HOST_GID}
+    ports:
+      - "8020:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./storage:/home/fastapi/app/api
+      - ./staticfiles:/home/api/staticfiles
+    entrypoint: ["sh", "/home/fastapi/app/api/start.sh"]
+volumes:
+  staticfiles:
+    external: true
