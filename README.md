@@ -1,6 +1,6 @@
 # FastAPI File Upload to Docker Volume
 
-## Permissions for container to access volume
+## Background: Permissions for container to access volume
 
 Source: [https://stackoverflow.com/a/45673309](https://stackoverflow.com/a/45673309)
 
@@ -9,6 +9,13 @@ Essentially, find the `id` info of the running container's user and use that inf
 ### docker-user-setup.sh
 
 This script gets the `id` info from host and puts it in the `.env` file. You only need to run it once. That information is then used to build the storage docker container with the container user having the same uid and gid as the host user.
+
+## env setup (do once)
+
+```bash
+cp .env.example .env
+sh docker-user-setup.sh
+```
 
 ## Run the thing
 
